@@ -38,7 +38,7 @@ def harvest(url):
 
   save(cached)
 
-  token = dom.getElementsByTagName('resumptiontoken')
+  token = dom.getElementsByTagName('resumptionToken')
   if len(token) == 0: return None
 
   return getText(token[0].childNodes)
