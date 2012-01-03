@@ -3,11 +3,11 @@ import urllib2, os, sys
 from xml.dom import minidom
 
 if len(sys.argv) < 2: raise Exception('API key required')
-
+resumeFile = sys.argv[2] if len(sys.argv) >= 3 else None
 apikey = sys.argv[1]
 url = u"http://www.rijksmuseum.nl/api/oai?apikey=%s&verb=listrecords&set=collectie_online" % apikey
 url2 = u"http://www.rijksmuseum.nl/api/oai?apikey=%s&verb=listrecords&resumptiontoken=" % apikey
-count = 0
+count = 0 # keep track of number of records harvested
 token = ""
 
 def getText(nodelist):
@@ -52,10 +52,32 @@ def save(data):
     for s in data:
       f.write(s)
 
+def resume(filename):
+  with open(filename, 'r') as f:
+    data = f.read()
+     # cache the data because this file-like object is not seekable
+    cached  = ""
+    for s in data:
+      cached += s
+
+    dom = minidom.parseString(cached)
+
+    countRecords = len(dom.getElementsByTagName('record'))
+
+    nodelist = dom.getElementsByTagName('resumptionToken')
+    if len(nodelist) == 0: return None, countRecords
+    strToken = getText(nodelist[0].childNodes)
+
+    return strToken, countRecords
+
 try:
 
-  token, countRecords = harvest(url)
-  count += countRecords
+  if resumeFile:
+      token, countRecords = resume(resumeFile)
+      count += int(resumeFile.split('.')[0]) + countRecords
+  else:
+    token, countRecords = harvest(url)
+    count += countRecords
 
   while token:
     token, countRecords = harvest(url2 + token)
@@ -63,5 +85,9 @@ try:
 
 
 except:
-  print "Unexpected error:", sys.exc_info()[0]
+  print "\n!!!"
+  print "Unexpected error"
+  print "To resume run this script with the last succesfully harvested file as second paramater:"
+  print "python harvest.py <API KEY> <LAST HARVESTED FILE>"
+  print "!!!\n"
   raise
