@@ -1,7 +1,6 @@
 
-import urllib2
+import urllib2, os, sys
 from xml.dom import minidom
-import sys
 
 if len(sys.argv) < 2: raise Exception('API key required')
 
@@ -38,10 +37,13 @@ def harvest(url):
 
   save(cached)
 
-  token = dom.getElementsByTagName('resumptionToken')
-  if len(token) == 0: return None
+  countRecords = len(dom.getElementsByTagName('record'))
 
-  return getText(token[0].childNodes)
+  nodelist = dom.getElementsByTagName('resumptionToken')
+  if len(nodelist) == 0: return None, countRecords
+  strToken = getText(nodelist[0].childNodes)
+
+  return strToken, countRecords
 
 def save(data):
   filename = str(count) + '.xml'
@@ -50,9 +52,16 @@ def save(data):
     for s in data:
       f.write(s)
 
-token = harvest(url)
+try:
 
-while token:
-  count += 1
-  token = harvest(url2 + token)
+  token, countRecords = harvest(url)
+  count += countRecords
 
+  while token:
+    token, countRecords = harvest(url2 + token)
+    count += countRecords
+
+
+except:
+  print "Unexpected error:", sys.exc_info()[0]
+  raise
