@@ -5,8 +5,9 @@ from xml.dom import minidom
 if len(sys.argv) < 2: raise Exception('API key required')
 resumeFile = sys.argv[2] if len(sys.argv) >= 3 else None
 apikey = sys.argv[1]
-url = u"http://www.rijksmuseum.nl/api/oai?apikey=%s&verb=listrecords&set=collectie_online" % apikey
-url2 = u"http://www.rijksmuseum.nl/api/oai?apikey=%s&verb=listrecords&resumptiontoken=" % apikey
+
+url = u"http://www.rijksmuseum.nl/api/oai/%s/?verb=listrecords&metadataPrefix=oai_dc" % apikey
+url2 = u"http://www.rijksmuseum.nl/api/oai/%s/?verb=listrecords&resumptiontoken=" % apikey
 count = 0 # keep track of number of records harvested
 token = ""
 
