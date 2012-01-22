@@ -50,6 +50,7 @@ To harvest images along-side the xml you can use the harvest-images.py script. T
 python harvest-images.py <API KEY>
 ```
 or:
+
 ```
 python harvest-images.py <API KEY> <LAST DOWNLOADED FILE>
 ```
