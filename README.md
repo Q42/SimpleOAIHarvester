@@ -58,5 +58,5 @@ python harvest-images.py <API KEY> <LAST DOWNLOADED FILE>
 ## disclaimer
 This is an unsupported piece of code that serves primarily as an example. Use it as is. Feedback is welcome but we cannot guarantee or even plan to fix any bugs or implement any features.
 
-## license
+
 MIT license
