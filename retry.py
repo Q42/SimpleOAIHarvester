@@ -1,8 +1,4 @@
-import time
-
-
-
-import math
+import time, math
 
 def retry(f, tries=3, delay=3, backoff=2):
   """Retries a function or method until it returns True.
@@ -39,5 +35,4 @@ def retry(f, tries=3, delay=3, backoff=2):
       else:
         return rv
 
-
-  return f_retry # true decorator -> decorated function
+  return f_retry

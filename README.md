@@ -42,6 +42,18 @@ Sometimes an error occurs while harvesting the data. To resume just pass in the 
 python harvest.py <API KEY> <LAST DOWNLOADED FILE>
 ```
 
+## harvesting images
+
+To harvest images along-side the xml you can use the harvest-images.py script. The script works exactly the same:
+
+```
+python harvest-images.py <API KEY>
+```
+or:
+```
+python harvest-images.py <API KEY> <LAST DOWNLOADED FILE>
+```
+
 ## disclaimer
 This is an unsupported piece of code that serves primarily as an example. Use it as is. Feedback is welcome but we cannot guarantee or even plan to fix any bugs or implement any features.
 
