@@ -3,7 +3,7 @@
 import argparse
 from xml.dom import minidom
 from utils import *
-import code
+
 parser = argparse.ArgumentParser(description='OAI ListMetadataFormats verb.')
 parser.add_argument('baseUrl', help='The baseUrl of the OAI repository.')
 
