@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python
 import urllib2, os, sys
 from xml.dom import minidom
 
