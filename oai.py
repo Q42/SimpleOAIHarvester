@@ -2,6 +2,8 @@ import urllib2
 from urlparse import urlparse
 import xml.etree.ElementTree as ET
 
+class OAIException(Exception):
+    pass
 
 def identify(base_url):
     return request(base_url, {
@@ -31,10 +33,21 @@ def list_identifiers(base_url, metadataPrefix):
         "metadataprefix" : metadataPrefix,
     })
 
-def list_records(base_url, metadataPrefix):
-    return request(base_url, {
+def list_records(base_url, metadataPrefix=None, set=None, token=None):
+    if not token:
+        args = {
         "verb" : "listrecords",
         "metadataprefix" : metadataPrefix
+        }
+
+        if set:
+            args["set"] = set
+
+        return request(base_url, args)
+    else:
+        return request(base_url, {
+            "verb" : "listrecords",
+            "resumptiontoken": token
     })
 
 
@@ -52,6 +65,7 @@ def request(baseUrl, params):
         if i < len(params)-1:
             url += "&"
 
+    print url
     response = urllib2.urlopen(url)
     data = ""
     for s in response:
@@ -75,7 +89,7 @@ def check_errors(dom):
     nodes = dom.findall('.//oai:error', { "oai" : "http://www.openarchives.org/OAI/2.0/" } )
     if len(nodes) > 0:
         error = nodes[0]
-        raise Exception(error.attrib['code'] + ": " + error.text)
+        raise OAIException(error.attrib['code'] + ": " + error.text)
 
 def parseUrl(url):
     parsedUrl = urlparse(url)

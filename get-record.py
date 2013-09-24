@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 
-import argparse
+import argparse, sys
+from urllib2 import HTTPError
 from oai import *
 
 parser = argparse.ArgumentParser(description='OAI GetRecord verb.')
@@ -11,5 +12,11 @@ parser.add_argument('format', help='The prefix that denotes the metadataFormat t
 args = parser.parse_args()
 
 if __name__ == "__main__":
-    xml = get_record(args.baseUrl, args.identifier, args.format)
+    print parser.description
+    try:
+        xml = get_record(args.baseUrl, args.identifier, args.format)
+    except (OAIException, HTTPError) as err:
+        print err
+        sys.exit(1)
+
     save(xml, args.identifier)

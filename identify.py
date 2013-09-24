@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 
-import argparse
-
+import argparse, sys
+from urllib2 import HTTPError
 from oai import *
 
 parser = argparse.ArgumentParser(description='OAI Identify verb.')
@@ -11,6 +11,12 @@ args = parser.parse_args()
 
 
 if __name__ == "__main__":
-    xml = identify(args.baseUrl)
+    print parser.description
+    try:
+        xml = identify(args.baseUrl)
+    except (OAIException, HTTPError) as err:
+        print err
+        sys.exit(1)
+
     parsedUrl = parseUrl(args.baseUrl)
     save(xml, filename=parsedUrl.netloc + "-identify")
