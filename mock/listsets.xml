@@ -1,0 +1,10 @@
+<?xml version="1.0" ?><OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:rm="http://rijksmuseum.nl/collection" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+  <responseDate>2013-09-16T14:30:35Z</responseDate>
+  <request verb="ListMetadataFormats" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/">http://rijksmuseum/nl/api/oai/key</request>
+  <ListSets xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/">
+    <set>
+      <setName>Lizzy's set</setName>
+      <setSpec>lizzy_set</setSpec>
+    </set>
+  </ListSets>
+</OAI-PMH>

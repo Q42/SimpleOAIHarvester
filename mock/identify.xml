@@ -1,0 +1,13 @@
+<?xml version="1.0" ?><OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:rm="http://rijksmuseum.nl/collection" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+  <responseDate>2013-09-16T15:04:21Z</responseDate>
+  <request verb="Identify" xmlns:rijks="http://rijksmuseum.nl">http://rijksmuseum/nl/api/oai/key</request>
+  <Identify xmlns:rijks="http://rijksmuseum.nl">
+    <repositoryName>Rijksmuseum Amsterdam</repositoryName>
+    <baseURL>http://rijksmuseum/nl/api/oai/key</baseURL>
+    <protocolVersion>2.0</protocolVersion>
+    <adminEmail>l.jongma@rijksmuseum.nl</adminEmail>
+    <earliestDatestamp>2011-01-01</earliestDatestamp>
+    <deletedRecord>no</deletedRecord>
+    <granularity>YYYY-MM-DD</granularity>
+  </Identify>
+</OAI-PMH>

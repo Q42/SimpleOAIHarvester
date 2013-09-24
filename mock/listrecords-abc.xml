@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='utf-8'?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+  <responseDate>2013-09-17T13:10:23Z</responseDate>
+  <request metadataPrefix="oai_dc" verb="ListRecords">http://rijksmuseum/nl/api/oai/rijks_d3v3l0p3rs</request>
+  <ListRecords>
+    <record>
+      <header>
+        <identifier>oai:rijksmuseum.nl:SK-A-4881</identifier>
+        <datestamp>0001-01-01T00:00:00Z</datestamp>
+      </header>
+      <metadata>
+        <oai_dc:dc>
+          <dc:identifier>http://rijksmuseum/nl/collectie/SK-A-4881</dc:identifier>
+          <dc:format>http://lh3.ggpht.com/DoGKqdRVllAdR3EBi31hiP_yyEljofJkdz0N-LTWWljAtgY5GEh0AymljBVhDZlcYJEaoaQ0rmPXfrJOJljPuUJ3RQ=s0</dc:format>
+          <dc:title>
+    Portret van een jonge man, waarschijnlijk Simon van Alphen (1650-1730).
+  </dc:title>
+          <dc:description>Portret van een jonge man uit de familie Van Alphen, waarschijnlijk Simon van Alphen. Kniestuk, staande geleund tegen een boom. Gebarend met de linkerhand, de rechterhand in de zij. Op de achtergrond een landschap met een waterval.</dc:description>
+          <dc:creator>Maes, Nicolaes</dc:creator>
+          <dc:format>cm</dc:format>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <resumptionToken>def</resumptionToken>
+  </ListRecords>
+</OAI-PMH>
