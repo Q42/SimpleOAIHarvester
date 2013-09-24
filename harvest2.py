@@ -22,8 +22,10 @@ def harvest(token=None):
         xml = list_records(args.baseUrl, metadataPrefix=args.metadataPrefix, set=args.set)
         save(xml, "records")
 
-    # response = Response(xml)
-    # print response.responseDate
+    response = Response(xml)
+    # print response
+    for rec in response.records:
+        print "found record: " + rec.localIdentifier
 
     countRecords = len(xml.findall(".//oai:record", {"oai": "http://www.openarchives.org/OAI/2.0/"}))
 

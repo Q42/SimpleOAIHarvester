@@ -36,8 +36,8 @@ def list_identifiers(base_url, metadataPrefix):
 def list_records(base_url, metadataPrefix=None, set=None, token=None):
     if not token:
         args = {
-        "verb" : "listrecords",
-        "metadataprefix" : metadataPrefix
+            "verb" : "listrecords",
+            "metadataprefix" : metadataPrefix
         }
 
         if set:
@@ -48,7 +48,7 @@ def list_records(base_url, metadataPrefix=None, set=None, token=None):
         return request(base_url, {
             "verb" : "listrecords",
             "resumptiontoken": token
-    })
+        })
 
 
 def request(baseUrl, params):
@@ -96,4 +96,53 @@ def parseUrl(url):
     if not parsedUrl.scheme or not parsedUrl.netloc:
         raise Exception("invalid url")
     return parsedUrl
+
+class Response:
+    """
+    verb (ex ListRecords)
+    responseDate
+    request
+        - baseUrl
+        - args
+    - record  [for GetRecord]
+    - records [for ListRecords]
+    - resumptionToken (for list types)
+    """
+    def __init__(self, xml):
+        # print dir(xml)
+        self._elements = {}
+        for el in xml.findall("*", { "oai" : "http://www.openarchives.org/OAI/2.0/" } ):
+
+            localName = el.tag.split("}")[1]
+            self._elements[localName] = el
+            print localName
+        # print xml
+        self.responseDate = self._elements["responseDate"].text
+        self.requestVerb = self._elements["request"].attrib["verb"]
+        self.requestArgs = self._elements["request"].attrib
+        # print self.requestArgs
+
+        elListRecords = xml.find("oai:ListRecords", { "oai" : "http://www.openarchives.org/OAI/2.0/" } )
+        elRecords =  elListRecords.findall("oai:record", { "oai" : "http://www.openarchives.org/OAI/2.0/" } )
+        self.records = []
+        for el in elRecords:
+            self.records.append(Record(el))
+
+
+
+
+class Record:
+    """
+
+
+        - [record]
+            - header
+                - identifier
+                - datestamp
+            - metadata
+
+    """
+    def __init__(self, element):
+        self.identifier = element.find("oai:header/oai:identifier", { "oai" : "http://www.openarchives.org/OAI/2.0/" } ).text
+        self.localIdentifier = self.identifier.split(":")[2]
 
