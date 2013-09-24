@@ -8,8 +8,11 @@ parser.add_argument('baseUrl', help='The baseUrl of the OAI repository.')
 parser.add_argument('metadataPrefix', help='The prefix that denotes the desired metadataformat.')
 parser.add_argument('--set', '-s', help='A setspec denoting a subset of the dataset.')
 parser.add_argument('--interactive', '-i', action="store_true",  help='In interactive mode, you\'ll have to confirm every new batch by pressing ENTER.')
+parser.add_argument('--dry', '-d', action="store_true",  help='In a dry run no files are saved.')
 
 args = parser.parse_args()
+
+print args.dry
 
 count = 0 # keep track of number of records harvested
 curToken = ""
@@ -17,10 +20,12 @@ curToken = ""
 def harvest(token=None):
     if token:
         xml = list_records(args.baseUrl, token=token)
-        save(xml, "records-" + token)
+        if not args.dry:
+            save(xml, "records-" + token)
     else:
         xml = list_records(args.baseUrl, metadataPrefix=args.metadataPrefix, set=args.set)
-        save(xml, "records")
+        if not args.dry:
+            save(xml, "records")
 
     response = Response(xml)
     # print response
